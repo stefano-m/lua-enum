@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/stefano-m/lua-enum.svg?branch=master)](https://travis-ci.org/stefano-m/lua-enum) [![codecov](https://codecov.io/gh/stefano-m/lua-enum/branch/master/graph/badge.svg)](https://codecov.io/gh/stefano-m/lua-enum)
+
 # Simulate Enums in Lua
 
 This is a little module that simulates [enumerated
