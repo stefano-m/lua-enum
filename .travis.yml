@@ -1,0 +1,40 @@
+language: python
+
+sudo: required
+
+env:
+  global:
+    - DISPLAY=fake
+  matrix:
+    - LUA="lua 5.2"
+    - LUA="lua 5.3"
+
+branches:
+  only:
+    - travis-ci
+    - master
+
+before_install:
+  - pip install hererocks
+  - hererocks ~/hererocks -r^ --$LUA
+  - export PATH=$PATH:~/hererocks/bin
+  - eval `luarocks path --bin`
+  - lua -v
+  - luarocks install luacheck
+  - luarocks install luacov
+  - luarocks install busted
+
+install:
+  - luarocks install --only-deps rockspec/enum-devel-1.rockspec
+
+script:
+  - luacheck .
+  - busted .
+  - busted --coverage .
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+cache:
+  directories:
+    - $HOME/.cache/hererocks
