@@ -17,6 +17,15 @@ describe("Enums", function ()
                 assert.equals("<Color.BLUE: 3>", tostring(Color[3]))
            end)
 
+           it("cannot reuse the same key", function ()
+                assert.has_error(
+                  function ()
+                    local _ = enum.new("Color", {"RED", "RED"})
+                  end,
+                  "Attempted to reuse key: 'RED'"
+                )
+           end)
+
            it("can be indexed by value", function ()
                 local Color = enum.new("Color", {"RED", "GREEN", "BLUE"})
 

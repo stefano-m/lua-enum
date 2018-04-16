@@ -28,4 +28,7 @@ Size[5] -- error "Invalid enum member: 5"
 Size.MINI -- error "Invalid enum: MINI"
 assert(Size.BIG.something == nil) -- true
 Size.MEDIUM.other = 1 -- error "Cannot set fields in enum value"
+
+-- Keys cannot be reused
+Color = enum.new("Color", {"RED", "RED"}) -- error "Attempted to reuse key: 'RED'"
 ```

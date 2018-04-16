@@ -39,6 +39,9 @@
   Size.MINI -- error "Invalid enum: MINI"
   assert(Size.BIG.something == nil) -- true
   Size.MEDIUM.other = 1 -- error "Cannot set fields in enum value"
+
+  -- Keys cannot be reused
+  Color = enum.new("Color", {"RED", "RED"}) -- error "Attempted to reuse key: 'RED'"
 ]]
 local string = string
 
@@ -65,6 +68,30 @@ local function make_meta(idx, name, value, _type)
     }
 end
 
+local function check(values)
+  local found = {}
+
+  for _, v in ipairs(values) do
+    if type(v) ~= "string" then
+      error("Can create enum only from strings")
+    end
+
+    if found[v] == nil then
+      found[v] = 1
+    else
+      found[v] = found[v] + 1
+    end
+  end
+
+  local msg = "Attempted to reuse key: '%s'"
+  for k, v in pairs(found) do
+    if v > 1 then
+      error(msg:format(k))
+    end
+  end
+
+end
+
 --- Make a new enum from all the string values passed in.
 -- @string name the name of the enum
 -- @tparam {string} values array of string values
@@ -87,10 +114,9 @@ function enum.new (name, values)
     }
   )
 
+  check(values)
+
   for i, v in ipairs(values) do
-    if type(v) ~= "string" then
-      error("Can create enum only from strings")
-    end
     local o = {}
     setmetatable(o, make_meta(i, name, v, _Type))
     _Private[v] = o
