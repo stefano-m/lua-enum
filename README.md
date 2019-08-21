@@ -8,6 +8,9 @@ types](https://en.wikipedia.org/wiki/Enumerated_type) in Lua.
 Its API is very similar to the [Python3 Enum
 API](https://docs.python.org/3/library/enum.html), although much more limited.
 
+If you are on NixOS, you can install this package from
+[nix-stefano-m-overlays](https://github.com/stefano-m/nix-stefano-m-nix-overlays).
+
 ## Example Usage
 
 ``` lua
