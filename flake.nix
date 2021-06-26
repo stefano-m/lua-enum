@@ -3,6 +3,9 @@
 
   outputs = { self, nixpkgs }:
     let
+
+      currentVersion = builtins.readFile ./VERSION;
+
       flakePkgs = import nixpkgs {
         system = "x86_64-linux";
         overlays = [ self.overlay ];
@@ -12,10 +15,7 @@
         buildLuaPackage rec {
           name = "${pname}-${version}";
           inherit pname;
-          # FIXME: add a Makefile or something so that 'make release' generates
-          # the version, adds a tag and commits. Then we can read the version
-          # with builtins.reafFile (beware of newlines!)
-          version = "v0.1.1-${self.shortRev or "dev"}";
+          version = "${currentVersion}-${self.shortRev or "dev"}";
 
           src = ./.;
 
