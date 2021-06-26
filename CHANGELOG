@@ -1,3 +1,18 @@
+* Release v0.1.2
+
+Stefano Mazzucco (11):
+      Add info about installing with NixOS to README
+      Add flake.nix
+      Add release target to Makefile
+      Use VERSION file in flake.nix
+      Improve release target
+      Add VERSION file so make release works
+      Add version to README.md and module when releasing
+      Add CHANGELOG
+      Clean up make release output
+      Restore dev versions after make release
+      Update Copyright year
+
 * Release v0.1.1
 
 Stefano Mazzucco (5):
