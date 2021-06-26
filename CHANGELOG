@@ -1,0 +1,13 @@
+* Release v0.1.1
+
+Stefano Mazzucco (5):
+      Add codecov and travis configuration
+      Add codecov and travis-ci badges to README.md
+      Error if same key is reused
+      Release version 0.1.1
+
+* Release v0.1.0
+
+Stefano Mazzucco (1):
+      Add first public implementation
+

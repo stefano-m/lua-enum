@@ -21,9 +21,11 @@ release: flake
 	luarocks new_version --dir rockspec --tag $(tag)
 	sed -i 's/@VERSION@/$(tag)/' README.md src/enum/init.lua
 	ldoc .
-	git add src/enum/init.lua README.md RELEASE VERSION rockspec docs
+	cat RELEASE CHANGELOG > CHANGELOG.2 && mv CHANGELOG.2 CHANGELOG
+	git add src/enum/init.lua README.md CHANGELOG VERSION rockspec docs
 	git commit -F RELEASE
 	git tag -a $(tag) -F RELEASE
+	rm -f RELEASE
 endif
 
 .PHONY: flake
