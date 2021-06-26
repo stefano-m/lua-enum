@@ -9,15 +9,18 @@ ifndef tag
 release:
 	$(error Fatal: must specify tag)
 else
-release:
+release: flake
 	@git status -s --untracked-files=no \
 	| egrep '.+' >/dev/null \
-	&& echo Cannot release with uncommitted files: && git status -s && exit 1 \
+	&& echo Cannot release with uncommitted files: \
+	&& git status -s && exit 1 \
 	|| true
 	echo -n $(tag) > VERSION
 	echo -e '* Release $(tag)\n' > RELEASE
 	git shortlog -n `git tag | sort | tail -1`..HEAD >> RELEASE
-	git add RELEASE VERSION
+	luarocks new_version --dir rockspec --tag $(tag)
+	ldoc .
+	git add RELEASE VERSION rockspec docs
 	git commit -F RELEASE
 	git tag -a $(tag) -F RELEASE
 endif
