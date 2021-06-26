@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/stefano-m/lua-enum.svg?branch=master)](https://travis-ci.org/stefano-m/lua-enum) [![codecov](https://codecov.io/gh/stefano-m/lua-enum/branch/master/graph/badge.svg)](https://codecov.io/gh/stefano-m/lua-enum)
 
-# Simulate Enums in Lua
+# Enum @VERSION@ - Simulate Enums in Lua
 
 This is a little module that simulates [enumerated
 types](https://en.wikipedia.org/wiki/Enumerated_type) in Lua.

@@ -19,8 +19,9 @@ release: flake
 	echo -e '* Release $(tag)\n' > RELEASE
 	git shortlog -n `git tag | sort | tail -1`..HEAD >> RELEASE
 	luarocks new_version --dir rockspec --tag $(tag)
+	sed -i 's/@VERSION@/$(tag)/' README.md src/enum/init.lua
 	ldoc .
-	git add RELEASE VERSION rockspec docs
+	git add src/enum/init.lua README.md RELEASE VERSION rockspec docs
 	git commit -F RELEASE
 	git tag -a $(tag) -F RELEASE
 endif
