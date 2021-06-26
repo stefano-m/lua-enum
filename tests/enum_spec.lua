@@ -97,13 +97,17 @@ describe("Enums", function ()
                   function ()
                     local _ = Size.SMALL < Size.BIG
                   end,
-                  "Unsupported operation")
+                  _G._VERSION:match("5.1$")
+                     and  "attempt to compare two table values"
+                     or "Unsupported operation")
 
                 assert.has_error(
                   function ()
                     local _ = Size.SMALL >= Size.BIG
                   end,
-                  "Unsupported operation")
+                  _G._VERSION:match("5.1$")
+                     and  "attempt to compare two table values"
+                     or "Unsupported operation")
            end)
 
            it("have the equality operator", function ()

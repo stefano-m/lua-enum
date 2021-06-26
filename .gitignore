@@ -1,2 +1,4 @@
 *~
 luacov.*.out
+.direnv/
+result*

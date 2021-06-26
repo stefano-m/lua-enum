@@ -2,11 +2,15 @@ project = enum
 sources = src/$(project)/*.lua
 files = README.md $(sources)
 
+.PHONY: flake
+flake:
+	nix flake check
+
 .PHONY: check
-check: test coverage lint
+check: lint test coverage
 
 .PHONY: lint
-lint: test
+lint:
 	luacheck .
 
 .PHONY: test
@@ -14,7 +18,7 @@ test: tests/*.lua
 	busted .
 
 .PHONY: coverage
-coverage: test
+coverage:
 	busted --coverage .
 
 docs: $(files)
