@@ -15,17 +15,17 @@ release: flake
 	&& echo Cannot release with uncommitted files: \
 	&& git status -s && exit 1 \
 	|| true
-	echo -n $(tag) > VERSION
+	@echo -n $(tag) > VERSION
 	echo -e '* Release $(tag)\n' > RELEASE
-	git shortlog -n `git tag | sort | tail -1`..HEAD >> RELEASE
+	@git shortlog -n `git tag | sort | tail -1`..HEAD >> RELEASE
 	luarocks new_version --dir rockspec --tag $(tag)
-	sed -i 's/@VERSION@/$(tag)/' README.md src/enum/init.lua
+	@sed -i 's/@VERSION@/$(tag)/' README.md src/enum/init.lua
 	ldoc .
-	cat RELEASE CHANGELOG > CHANGELOG.2 && mv CHANGELOG.2 CHANGELOG
+	@cat RELEASE CHANGELOG > CHANGELOG.2 && mv CHANGELOG.2 CHANGELOG
 	git add src/enum/init.lua README.md CHANGELOG VERSION rockspec docs
 	git commit -F RELEASE
 	git tag -a $(tag) -F RELEASE
-	rm -f RELEASE
+	@rm -f RELEASE
 endif
 
 .PHONY: flake
