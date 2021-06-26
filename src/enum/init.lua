@@ -1,5 +1,5 @@
 --[[
-  Copyright 2017 Stefano Mazzucco
+  Copyright 2017 - 2021 Stefano Mazzucco
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
   @release @VERSION@
 
   @author Stefano Mazzucco
-  @copyright 2017 Stefano Mazzucco
+  @copyright 2017 - 2021 Stefano Mazzucco
   @license Apache v2.0
 
   @usage
