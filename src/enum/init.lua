@@ -16,7 +16,7 @@
 
 --[[-
   @module enum
-  @release v0.1.2
+  @release @VERSION@
 
   @author Stefano Mazzucco
   @copyright 2017 - 2021 Stefano Mazzucco
