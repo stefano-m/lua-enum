@@ -61,35 +61,30 @@
       };
 
       overlay = final: prev: with self.packages.x86_64-linux; {
-        lua = prev.lua.override {
-          packageOverrides = this: other: {
-            enum = lua_enum;
-          };
+
+        # NOTE: lua = prev.lua.override { packageOverrides = this: other: {... }}
+        # Seems to be broken as it does not allow to combine different overlays.
+
+        luaackages = prev.luaPackages // {
+          enum = lua_enum;
         };
 
-        lua5_1 = prev.lua5_1.override {
-          packageOverrides = this: other: {
-            enum = lua52_enum;
-          };
+        lua51Packages = prev.lua51Packages // {
+          enum = lua51_enum;
         };
 
-        lua5_2 = prev.lua5_2.override {
-          packageOverrides = this: other: {
-            enum = lua52_enum;
-          };
+        lua52Packages = prev.lua52Packages // {
+          enum = lua52_enum;
         };
 
-        lua5_3 = prev.lua5_3.override {
-          packageOverrides = this: other: {
-            enum = lua53_enum;
-          };
+        lua53Packages = prev.lua53Packages // {
+          enum = lua53_enum;
         };
 
-        luajit = prev.luajit.override {
-          packageOverrides = this: other: {
-            enum = luajit_enum;
-          };
+        luajitPackages = prev.luajitPackages // {
+          enum = luajit_enum;
         };
+
       };
 
 
