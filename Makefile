@@ -17,7 +17,7 @@ release: flake
 	|| true
 	@echo -n $(tag) > VERSION
 	echo -e '* Release $(tag)\n' > RELEASE
-	@git shortlog -n `git tag | sort | tail -1`..HEAD \
+	@git shortlog -n `git tag | tr \. ' ' | sort  -k1.2n -k2n -k3n | tr ' ' \. | tail -1`..HEAD \
 	| grep -v "Restart Development" >> RELEASE
 	luarocks new_version --dir rockspec --tag $(tag)
 	@sed -i 's/@VERSION@/$(tag)/' README.md src/enum/init.lua
