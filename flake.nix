@@ -34,7 +34,7 @@
           checkPhase = ''
             luacheck src tests
             busted .
-        '';
+          '';
 
         };
 
@@ -55,7 +55,8 @@
       devShell.x86_64-linux = flakePkgs.mkShell {
         LUA_PATH = "./src/?.lua;./src/?/init.lua";
         buildInputs = (with self.defaultPackage.x86_64-linux; buildInputs ++ propagatedBuildInputs) ++ (with flakePkgs; [
-          nixpkgs-fmt luarocks
+          nixpkgs-fmt
+          luarocks
         ]);
       };
 
