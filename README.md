@@ -48,6 +48,30 @@ versions of Lua shipped with nix as well as an
 [overlay](https://nixos.wiki/wiki/Overlays) that adds the `enum` attribute to
 the Lua package sets.
 
+----------
+
+**NOTE**
+
+To ensure that the flake overlays are composable, `enum` is added *directly* to
+the top-level `luaPackages`. An unfortunate consequence is that `enum` will
+**not** be present in `lua.pkgs`. To use `enum` in `lua.withPackages`, one must
+refer to the top-level `luaPackages`.
+
+For example, say that you want a Lua environment with `enum` and `http`, you
+need to do something like:
+
+``` nix
+let
+  # assume that enumOverlay is the overlay provided by the enum flake.
+  pkgs = import <nixpkgs> {overlays = [enumOverlay];};
+in
+# http is present in lua.pkgs
+# enum is not present in lua.pkgs
+myLuaEnv = pkgs.lua.withPackages(ps: [ps.http pkgs.luaPackages.enum])
+```
+
+----------
+
 ## Using Luarocks
 
 This package is [published to Luarocks as
