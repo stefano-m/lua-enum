@@ -60,4 +60,4 @@ upload: check
 
 .PHONY: clean
 clean:
-	rm -rf luacov.*.out
+	rm -rf luacov.*.out result
