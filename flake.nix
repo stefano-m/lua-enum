@@ -65,7 +65,7 @@
         # NOTE: lua = prev.lua.override { packageOverrides = this: other: {... }}
         # Seems to be broken as it does not allow to combine different overlays.
 
-        luaackages = prev.luaPackages // {
+        luaPackages = prev.luaPackages // {
           enum = lua_enum;
         };
 
