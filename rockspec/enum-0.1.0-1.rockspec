@@ -7,7 +7,7 @@ source = {
 description = {
    summary = "Simulate enumerations in Lua",
    detailed = "Simulate enumerations in Lua",
-   homepage = "https://github.com/stefano-m/lua-enum",
+   homepage = "git+https://github.com/stefano-m/lua-enum",
    license = "Apache v2.0"
 }
 supported_platforms = {
