@@ -1,5 +1,5 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.05";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
 
   outputs = { self, nixpkgs }:
     let
@@ -8,7 +8,7 @@
 
       flakePkgs = import nixpkgs {
         system = "x86_64-linux";
-        overlays = [ self.overlay ];
+        overlays = [ self.overlays.default ];
       };
 
       buildPackage = pname: luaPackages: with luaPackages;
@@ -31,10 +31,7 @@
           '';
 
           doCheck = true;
-          checkPhase = ''
-            luacheck src tests
-            busted .
-          '';
+          checkPhase = "make check";
 
         };
 
@@ -42,7 +39,8 @@
     {
       checks.x86_64-linux = self.packages.x86_64-linux;
 
-      packages.x86_64-linux = {
+      packages.x86_64-linux = rec {
+        default = lua_enum;
         lua_enum = buildPackage "enum" flakePkgs.luaPackages;
         lua51_enum = buildPackage "enum" flakePkgs.lua51Packages;
         lua52_enum = buildPackage "enum" flakePkgs.lua52Packages;
@@ -50,17 +48,15 @@
         luajit_enum = buildPackage "enum" flakePkgs.luajitPackages;
       };
 
-      defaultPackage.x86_64-linux = self.packages.x86_64-linux.lua_enum;
-
-      devShell.x86_64-linux = flakePkgs.mkShell {
+      devShells.x86_64-linux.default = flakePkgs.mkShell {
         LUA_PATH = "./src/?.lua;./src/?/init.lua";
-        buildInputs = (with self.defaultPackage.x86_64-linux; buildInputs ++ propagatedBuildInputs) ++ (with flakePkgs; [
+        buildInputs = (with self.packages.x86_64-linux.default; buildInputs ++ propagatedBuildInputs) ++ (with flakePkgs; [
           nixpkgs-fmt
           luarocks
         ]);
       };
 
-      overlay = final: prev: with self.packages.x86_64-linux; {
+      overlays.default = final: prev: with self.packages.x86_64-linux; {
 
         # NOTE: lua = prev.lua.override { packageOverrides = this: other: {... }}
         # Seems to be broken as it does not allow to combine different overlays.

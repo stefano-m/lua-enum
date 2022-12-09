@@ -48,9 +48,9 @@ local string = string
 
 local enum = {}
 
-local function make_meta(idx, name, value, _type)
+local function make_meta(idx, name, value, type_)
   return {
-        __index = { value = idx, name = value, _type = _type },
+        __index = { value = idx, name = value, _type = type_ },
         __newindex = function ()
           error("Cannot set fields in enum value", 2)
         end,
