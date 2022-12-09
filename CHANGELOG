@@ -1,3 +1,17 @@
+* Release v0.1.3
+
+Stefano Mazzucco (11):
+      Reformat flake with nixpkgs-fmt
+      Refactor flake overlays so they can be composed
+      Add note to README about nix overlay and luaPackages
+      Improve sorting by release number in make release
+      Fix typo in flake overlay: luaackages -> luaPackages
+      Remove 'result' too when doing 'make clean'
+      Update flake.lock
+      Update flake.lock
+      Use correct git+https url syntax in rockspec
+      nixpkgs 21.05 -> 22.11
+
 * Release v0.1.2
 
 Stefano Mazzucco (11):
